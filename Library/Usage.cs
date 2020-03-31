@@ -138,28 +138,23 @@ namespace Recurly
                         break;
 
                     case "recording_timestamp":
-                        if (DateTime.TryParse(reader.ReadElementContentAsString(), out dateVal))
-                            RecordingTimestamp = dateVal;
+                        RecordingTimestamp = reader.ReadElementContentAsString().AsDateTime();
                         break;
 
                     case "usage_timestamp":
-                        if (DateTime.TryParse(reader.ReadElementContentAsString(), out dateVal))
-                            UsageTimestamp = dateVal;
+                        UsageTimestamp = reader.ReadElementContentAsString().AsDateTime();
                         break;
 
                     case "billed_at":
-                        if (DateTime.TryParse(reader.ReadElementContentAsString(), out dateVal))
-                            BilledAt = dateVal;
+                        BilledAt = reader.ReadElementContentAsString().AsDateTime();
                         break;
 
                     case "created_at":
-                        if (DateTime.TryParse(reader.ReadElementContentAsString(), out dateVal))
-                            CreatedAt = dateVal;
+                        CreatedAt = reader.ReadElementContentAsString().AsDateTime();
                         break;
 
                     case "updated_at":
-                        if (DateTime.TryParse(reader.ReadElementContentAsString(), out dateVal))
-                            UpdatedAt = dateVal;
+                        UpdatedAt = reader.ReadElementContentAsString().AsDateTime();
                         break;
                 }
             }

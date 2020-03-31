@@ -103,8 +103,7 @@ namespace Recurly
                         break;
 
                     case "deliver_at":
-                        if (DateTime.TryParse(reader.ReadElementContentAsString(), out dateVal))
-                            DeliverAt = dateVal;
+                        DeliverAt = reader.ReadElementContentAsString().AsDateTime();
                         break;
                     
                     case "method":
@@ -130,7 +129,7 @@ namespace Recurly
             xmlWriter.WriteStringIfValid("personal_message", PersonalMessage);
 
             if (DeliverAt.HasValue)
-                xmlWriter.WriteStringIfValid("deliver_at", DeliverAt.Value.ToString("s"));
+                xmlWriter.WriteStringIfValid("deliver_at", DeliverAt.AsString());
             
             if (Address != null)
                 Address.WriteXml(xmlWriter);

@@ -541,18 +541,15 @@ namespace Recurly
                         break;
 
                     case "created_at":
-                        if (DateTime.TryParse(reader.ReadElementContentAsString(), out dt))
-                            CreatedAt = dt;
+                        CreatedAt = reader.ReadElementContentAsString().AsDateTime();
                         break;
 
                     case "updated_at":
-                        if (DateTime.TryParse(reader.ReadElementContentAsString(), out dt))
-                            UpdatedAt = dt;
+                        UpdatedAt = reader.ReadElementContentAsString().AsDateTime();
                         break;                    
 
                     case "closed_at":
-                        if (DateTime.TryParse(reader.ReadElementContentAsString(), out dt))
-                            ClosedAt = dt;
+                        ClosedAt = reader.ReadElementContentAsString().AsDateTime();
                         break;
 
                     case "tax_type":
@@ -633,8 +630,7 @@ namespace Recurly
                         break;
 
                     case "due_on":
-                        if (DateTime.TryParse(reader.ReadElementContentAsString(), out dt))
-                            DueOn = dt;
+                        DueOn = reader.ReadElementContentAsString().AsDateTime();
                         break;
 
                     case "type":
@@ -646,8 +642,7 @@ namespace Recurly
                         break;
 
                     case "attempt_next_collection_at":
-                        if (DateTime.TryParse(reader.ReadElementContentAsString(), out dt))
-                            AttemptNextCollectionAt = dt;
+                        AttemptNextCollectionAt = reader.ReadElementContentAsString().AsDateTime();
                         break;
 
                     case "recovery_reason":

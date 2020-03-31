@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Recurly.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -30,6 +31,29 @@ namespace Recurly
         public static string AsString(this bool b)
         {
             return b.ToString().ToLowerInvariant();
+        }
+
+        public static string AsString(this DateTime? d)
+        {
+            return d?.AsString();
+        }
+
+        public static string AsString(this DateTime d)
+        {
+            // ISO 8601 without milliseconds
+            return d.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ");
+        }
+
+        public static DateTime? AsDateTime(this string s)
+        {
+            if (DateTime.TryParse(s,
+                            CultureInfo.InvariantCulture,
+                            DateTimeStyles.AdjustToUniversal,
+                            out System.DateTime dt))
+            {
+                return dt;
+            }
+            return null;
         }
 
         /// <summary>

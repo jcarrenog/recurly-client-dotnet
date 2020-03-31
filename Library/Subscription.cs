@@ -711,48 +711,39 @@ namespace Recurly
                         break;
 
                     case "activated_at":
-                        if (DateTime.TryParse(reader.ReadElementContentAsString(), out dateVal))
-                            ActivatedAt = dateVal;
+                        ActivatedAt = reader.ReadElementContentAsString().AsDateTime();
                         break;
 
                     case "canceled_at":
-                        if (DateTime.TryParse(reader.ReadElementContentAsString(), out dateVal))
-                            CanceledAt = dateVal;
+                        CanceledAt = reader.ReadElementContentAsString().AsDateTime();
                         break;
 
                     case "expires_at":
-                        if (DateTime.TryParse(reader.ReadElementContentAsString(), out dateVal))
-                            ExpiresAt = dateVal;
+                        ExpiresAt = reader.ReadElementContentAsString().AsDateTime();
                         break;
 
                     case "updated_at":
-                        if (DateTime.TryParse(reader.ReadElementContentAsString(), out dateVal))
-                            UpdatedAt = dateVal; ;
+                        UpdatedAt = reader.ReadElementContentAsString().AsDateTime();
                         break;
 
                     case "current_period_started_at":
-                        if (DateTime.TryParse(reader.ReadElementContentAsString(), out dateVal))
-                            CurrentPeriodStartedAt = dateVal;
+                        CurrentPeriodStartedAt = reader.ReadElementContentAsString().AsDateTime();
                         break;
 
                     case "current_period_ends_at":
-                        if (DateTime.TryParse(reader.ReadElementContentAsString(), out dateVal))
-                            CurrentPeriodEndsAt = dateVal;
+                        CurrentPeriodEndsAt = reader.ReadElementContentAsString().AsDateTime();
                         break;
 
                     case "trial_started_at":
-                        if (DateTime.TryParse(reader.ReadElementContentAsString(), out dateVal))
-                            TrialPeriodStartedAt = dateVal;
+                        TrialPeriodStartedAt = reader.ReadElementContentAsString().AsDateTime();
                         break;
 
                     case "trial_ends_at":
-                        if (DateTime.TryParse(reader.ReadElementContentAsString(), out dateVal))
-                            _trialPeriodEndsAt = dateVal;
+                        _trialPeriodEndsAt = reader.ReadElementContentAsString().AsDateTime();
                         break;
 
                     case "bank_account_authorized_at":
-                        if (DateTime.TryParse(reader.ReadElementContentAsString(), out dateVal))
-                            BankAccountAuthorizedAt = dateVal;
+                        BankAccountAuthorizedAt = reader.ReadElementContentAsString().AsDateTime();
                         break;
 
                     case "subscription_add_ons":
@@ -857,11 +848,7 @@ namespace Recurly
                         break;
 
                     case "converted_at":
-                        DateTime date;
-                        if (DateTime.TryParse(reader.ReadElementContentAsString(), out date))
-                        {
-                            ConvertedAt = date;
-                        }
+                        ConvertedAt = reader.ReadElementContentAsString().AsDateTime();
                         break;
 
                     case "no_billing_info_reason":
@@ -891,23 +878,19 @@ namespace Recurly
                         break;
 
                     case "current_term_started_at":
-                        if (DateTime.TryParse(reader.ReadElementContentAsString(), out dateVal))
-                            CurrentTermStartedAt = dateVal;
+                        CurrentTermStartedAt = reader.ReadElementContentAsString().AsDateTime() ?? default;
                         break;
 
                     case "current_term_ends_at":
-                        if (DateTime.TryParse(reader.ReadElementContentAsString(), out dateVal))
-                            CurrentTermEndsAt = dateVal;
+                        CurrentTermEndsAt = reader.ReadElementContentAsString().AsDateTime() ?? default;
                         break;
 
                     case "first_bill_date":
-                        if (DateTime.TryParse(reader.ReadElementContentAsString(), out dateVal))
-                            FirstBillDate = dateVal;
+                        FirstBillDate = reader.ReadElementContentAsString().AsDateTime() ?? default;
                         break;
 
                     case "next_bill_date":
-                        if (DateTime.TryParse(reader.ReadElementContentAsString(), out dateVal))
-                            NextBillDate = dateVal;
+                        NextBillDate = reader.ReadElementContentAsString().AsDateTime() ?? default;
                         break;
 
                     case "shipping_method_code":
@@ -1010,19 +993,19 @@ namespace Recurly
             xmlWriter.WriteElementString("quantity", Quantity.AsString());
 
             if (TrialPeriodEndsAt.HasValue)
-                xmlWriter.WriteElementString("trial_ends_at", TrialPeriodEndsAt.Value.ToString("s"));
+                xmlWriter.WriteElementString("trial_ends_at", TrialPeriodEndsAt.AsString());
 
             if (BankAccountAuthorizedAt.HasValue)
-                xmlWriter.WriteElementString("bank_account_authorized_at", BankAccountAuthorizedAt.Value.ToString("s"));
+                xmlWriter.WriteElementString("bank_account_authorized_at", BankAccountAuthorizedAt.AsString());
 
             if (StartsAt.HasValue)
-                xmlWriter.WriteElementString("starts_at", StartsAt.Value.ToString("s"));
+                xmlWriter.WriteElementString("starts_at", StartsAt.AsString());
 
             if (TotalBillingCycles.HasValue)
                 xmlWriter.WriteElementString("total_billing_cycles", TotalBillingCycles.Value.AsString());
 
             if (FirstRenewalDate.HasValue)
-                xmlWriter.WriteElementString("first_renewal_date", FirstRenewalDate.Value.ToString("s"));
+                xmlWriter.WriteElementString("first_renewal_date", FirstRenewalDate.AsString());
 
             if (Bulk.HasValue)
                 xmlWriter.WriteElementString("bulk", Bulk.ToString().ToLower());

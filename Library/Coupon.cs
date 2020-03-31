@@ -267,8 +267,7 @@ namespace Recurly
                         break;
 
                     case "redeem_by_date":
-                        if (DateTime.TryParse(reader.ReadElementContentAsString(), out date))
-                            RedeemByDate = date;
+                        RedeemByDate = reader.ReadElementContentAsString().AsDateTime();
                         break;
 
                     case "single_use":
@@ -407,7 +406,7 @@ namespace Recurly
             xmlWriter.WriteElementString("invoice_description", InvoiceDescription);
 
             if (RedeemByDate.HasValue)
-                xmlWriter.WriteElementString("redeem_by_date", RedeemByDate.Value.ToString("s"));
+                xmlWriter.WriteElementString("redeem_by_date", RedeemByDate.AsString());
 
             if (SingleUse.HasValue)
                 xmlWriter.WriteElementString("single_use", SingleUse.Value.AsString());
@@ -484,7 +483,7 @@ namespace Recurly
                 xmlWriter.WriteElementString("invoice_description", InvoiceDescription);
 
             if (RedeemByDate.HasValue)
-                xmlWriter.WriteElementString("redeem_by_date", RedeemByDate.Value.ToString("s"));
+                xmlWriter.WriteElementString("redeem_by_date", RedeemByDate.AsString());
 
             if (MaxRedemptions.HasValue)
                 xmlWriter.WriteElementString("max_redemptions", MaxRedemptions.Value.AsString());

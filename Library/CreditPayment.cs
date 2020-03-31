@@ -66,18 +66,15 @@ namespace Recurly
                         break;
 
                     case "created_at":
-                        if (DateTime.TryParse(reader.ReadElementContentAsString(), out dt))
-                            CreatedAt = dt;
+                        CreatedAt = reader.ReadElementContentAsString().AsDateTime() ?? default;
                         break;
 
                     case "updated_at":
-                        if(DateTime.TryParse(reader.ReadElementContentAsString(), out dt))
-                            UpdatedAt = dt;
+                        UpdatedAt = reader.ReadElementContentAsString().AsDateTime() ?? default;
                         break;
 
                     case "voided_at":
-                        if (DateTime.TryParse(reader.ReadElementContentAsString(), out dt))
-                            VoidedAt = dt;
+                        VoidedAt = reader.ReadElementContentAsString().AsDateTime() ?? default;
                         break;
                 }
             }

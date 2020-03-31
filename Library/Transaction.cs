@@ -302,11 +302,7 @@ namespace Recurly
                         ApprovalCode = reader.ReadElementContentAsString();
                         break;
                     case "collected_at":
-                        DateTime d;
-                        if (DateTime.TryParse(reader.ReadElementContentAsString(), out d))
-                        {
-                            CollectedAt = d;
-                        }
+                        CollectedAt = reader.ReadElementContentAsString().AsDateTime() ?? default;
                         break;
                     case "transaction_error":
                         Error = new TransactionError(reader);

@@ -298,28 +298,23 @@ namespace Recurly
                         break;
 
                     case "created_at":
-                        if (DateTime.TryParse(reader.ReadElementContentAsString(), out dateVal))
-                            CreatedAt = dateVal;
+                        CreatedAt = reader.ReadElementContentAsString().AsDateTime() ?? default;
                         break;
 
                     case "updated_at":
-                        if (DateTime.TryParse(reader.ReadElementContentAsString(), out dateVal))
-                            UpdatedAt = dateVal;
+                        UpdatedAt = reader.ReadElementContentAsString().AsDateTime() ?? default;
                         break;
 
                     case "redeemed_at":
-                        if (DateTime.TryParse(reader.ReadElementContentAsString(), out dateVal))
-                            RedeemedAt = dateVal;
+                        RedeemedAt = reader.ReadElementContentAsString().AsDateTime();
                         break;
 
                     case "canceled_at":
-                        if (DateTime.TryParse(reader.ReadElementContentAsString(), out dateVal))
-                            CanceledAt = dateVal;
+                        CanceledAt = reader.ReadElementContentAsString().AsDateTime();
                         break;
 
                     case "delivered_at":
-                        if (DateTime.TryParse(reader.ReadElementContentAsString(), out dateVal))
-                            DeliveredAt = dateVal;
+                        DeliveredAt = reader.ReadElementContentAsString().AsDateTime();
                         break;
                 }
             }

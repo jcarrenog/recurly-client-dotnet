@@ -35,8 +35,8 @@ namespace Recurly
             var nvc = System.Web.HttpUtility.ParseQueryString(string.Empty);
             if (SortField.HasValue) nvc["sort"] = SortField.Value.ToString().EnumNameToTransportCase();
             if (OrderField.HasValue) nvc["order"] = OrderField.Value.ToString().EnumNameToTransportCase();
-            if (BeginTime.HasValue) nvc["begin_time"] = BeginTime.Value.ToString("s");
-            if (EndTime.HasValue) nvc["end_time"] = EndTime.Value.ToString("s");
+            if (BeginTime.HasValue) nvc["begin_time"] = BeginTime.AsString();
+            if (EndTime.HasValue) nvc["end_time"] = EndTime.Value.AsString();
             return nvc;
         }
 

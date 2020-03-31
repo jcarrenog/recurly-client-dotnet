@@ -243,27 +243,19 @@ namespace Recurly
                         break;
 
                     case "start_date":
-                        DateTime startDate;
-                        if (DateTime.TryParse(reader.ReadElementContentAsString(), out startDate))
-                            StartDate = startDate;                        
+                        StartDate = reader.ReadElementContentAsString().AsDateTime() ?? default;
                         break;
 
                     case "end_date":
-                        DateTime endDate;
-                        if (DateTime.TryParse(reader.ReadElementContentAsString(), out endDate))
-                            EndDate = endDate;
+                        EndDate = reader.ReadElementContentAsString().AsDateTime() ?? default;
                         break;
 
                     case "created_at":
-                        DateTime createdAt;
-                        if (DateTime.TryParse(reader.ReadElementContentAsString(), out createdAt))
-                            CreatedAt = createdAt;
+                        CreatedAt = reader.ReadElementContentAsString().AsDateTime() ?? default;
                         break;
 
                     case "updated_at":
-                        DateTime updatedAt;
-                        if(DateTime.TryParse(reader.ReadElementContentAsString(), out updatedAt))
-                            UpdatedAt = updatedAt;
+                        UpdatedAt = reader.ReadElementContentAsString().AsDateTime() ?? default;
                         break;
 
                     case "state":
@@ -319,9 +311,9 @@ namespace Recurly
             if (TaxCode != null)
                 xmlWriter.WriteElementString("tax_code", TaxCode);
             if (StartDate != DateTime.MinValue)
-                xmlWriter.WriteElementString("start_date", StartDate.ToString("s"));
+                xmlWriter.WriteElementString("start_date", StartDate.AsString());
             if (EndDate.HasValue)
-                xmlWriter.WriteElementString("end_date", EndDate.Value.ToString("s"));
+                xmlWriter.WriteElementString("end_date", EndDate.AsString());
             if (Origin != null)
                 xmlWriter.WriteElementString("origin", Origin);
             xmlWriter.WriteEndElement(); // End: adjustment

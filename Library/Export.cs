@@ -31,10 +31,7 @@ namespace Recurly
                 switch (reader.Name)
                 {
                     case "date":
-                        DateTime d;
-                        if (DateTime.TryParse(reader.ReadElementContentAsString(), out d))
-                            Date = d;
-
+                        Date = reader.ReadElementContentAsString().AsDateTime() ?? default;
                         break;
                 }
             }
@@ -75,9 +72,7 @@ namespace Recurly
                         Name = reader.ReadElementContentAsString();
                         break;
                     case "expires_at":
-                        DateTime d;
-                        if (DateTime.TryParse(reader.ReadElementContentAsString(), out d))
-                            ExpiresAt = d;
+                        ExpiresAt = reader.ReadElementContentAsString().AsDateTime();
                         break;
                     case "download_url":
                         DownloadUrl = reader.ReadElementContentAsString();

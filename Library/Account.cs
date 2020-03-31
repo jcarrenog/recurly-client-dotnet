@@ -579,8 +579,7 @@ namespace Recurly
                         break;
 
                     case "closed_at":
-                        if (DateTime.TryParse(reader.ReadElementContentAsString(), out dt))
-                            ClosedAt = dt;
+                        ClosedAt = reader.ReadElementContentAsString().AsDateTime();
                         break;
 
                     case "created_at":

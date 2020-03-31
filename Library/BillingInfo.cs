@@ -358,11 +358,7 @@ namespace Recurly
                         break;
 
                     case "updated_at":
-                        DateTime d;
-                        if (DateTime.TryParse(reader.ReadElementContentAsString(), out d))
-                        {
-                            UpdatedAt = d;
-                        }
+                        UpdatedAt = reader.ReadElementContentAsString().AsDateTime() ?? default;
                         break;
 
                     default:
