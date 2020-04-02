@@ -5,6 +5,7 @@ using System.Xml;
 
 namespace Recurly
 {
+  #region ChannelAdvisor Addition (not in the official repository)
   public class Price : RecurlyEntity
   {
     internal Price(XmlReader reader)
@@ -35,6 +36,7 @@ namespace Recurly
       writer.WriteElementString(CurrencyCode, Amount.ToString());
     }
   }
+  #endregion
 
   /// <summary>
   /// An item in Recurly.
@@ -56,12 +58,6 @@ namespace Recurly
 
     public string State { get; private set; }
 
-    public string TaxCode { get; set; }
-
-    public bool TaxExempt { get; set; }
-
-    public Price[] UnitAmountInCents { get; set; }
-
     public List<CustomField> CustomFields
     {
       get { return _customFields ?? (_customFields = new List<CustomField>()); }
@@ -69,6 +65,16 @@ namespace Recurly
     }
 
     private List<CustomField> _customFields;
+
+    #region ChannelAdvisor Addition (not in the official repository)
+
+    public string TaxCode { get; set; }
+
+    public bool TaxExempt { get; set; }
+
+    public Price[] UnitAmountInCents { get; set; }
+
+    #endregion
 
     public DateTime? CreatedAt { get; private set; }
 
@@ -126,14 +132,15 @@ namespace Recurly
 
     public void Deactivate()
     {
-      Client.Instance.PerformRequest(Client.HttpRequestMethod.Delete, UrlPrefix + Uri.EscapeDataString(ItemCode));
+      Client.Instance.PerformRequest(Client.HttpRequestMethod.Delete, 
+          UrlPrefix + Uri.EscapeDataString(ItemCode));
     }
 
     public void Reactivate()
     {
       Client.Instance.PerformRequest(Client.HttpRequestMethod.Put,
-      UrlPrefix + Uri.EscapeDataString(ItemCode) + "/reactivate",
-      ReadXml);
+          UrlPrefix + Uri.EscapeDataString(ItemCode) + "/reactivate",
+          ReadXml);
     }
 
     internal override void ReadXml(XmlTextReader reader)
@@ -159,6 +166,7 @@ namespace Recurly
             Description = reader.ReadElementContentAsString();
             break;
 
+        #region ChannelAdvisor Addition (not in the official repository)
           case "unit_amount_in_cents":
             UnitAmountInCents = ReadPrices(reader);
             break;
@@ -190,6 +198,7 @@ namespace Recurly
           case "deleted_at":
             DeletedAt = reader.ReadElementContentAsString().AsDateTime();
             break;
+        #endregion
         }
       }
     }
@@ -222,8 +231,11 @@ namespace Recurly
       xmlWriter.WriteStringIfValid("accounting_code", AccountingCode);
       xmlWriter.WriteStringIfValid("revenue_schedule_type", RevenueScheduleType);
       xmlWriter.WriteStringIfValid("state", State);
+
+      #region ChannelAdvisor Addition (not in the official repository)
       xmlWriter.WriteIfCollectionHasAny("custom_fields", CustomFields);
       xmlWriter.WriteIfCollectionHasAny("unit_amount_in_cents", UnitAmountInCents);
+      #endregion
 
       xmlWriter.WriteEndElement();
     }

@@ -33,6 +33,8 @@ namespace Recurly
             return b.ToString().ToLowerInvariant();
         }
 
+        #region ChannelAdvisor Addition (not in the official repository)
+
         public static string AsString(this DateTime? d)
         {
             return d?.AsString();
@@ -56,14 +58,16 @@ namespace Recurly
             return null;
         }
 
-        /// <summary>
-        /// Attempts to parse the <see cref="System.Int32"/> <paramref name="i"/> to the given Enumeration <typeparamref name="T"/>.
-        /// </summary>
-        /// <typeparam name="T">The enum to attempt to parse to.</typeparam>
-        /// <param name="i">The int to attempt to parse.</param>
-        /// <returns>The results of attempting to parse the transformed string to the given enum.</returns>
-        /// <exception cref="T:System.ArgumentException"><typeparamref name="T"/> is not an <see cref="T:System.Enum"/>. -or- <paramref name="i"/> does not match a member of the enum.</exception>
-        public static T ParseAsEnum<T>(this int i)
+        #endregion
+
+    /// <summary>
+    /// Attempts to parse the <see cref="System.Int32"/> <paramref name="i"/> to the given Enumeration <typeparamref name="T"/>.
+    /// </summary>
+    /// <typeparam name="T">The enum to attempt to parse to.</typeparam>
+    /// <param name="i">The int to attempt to parse.</param>
+    /// <returns>The results of attempting to parse the transformed string to the given enum.</returns>
+    /// <exception cref="T:System.ArgumentException"><typeparamref name="T"/> is not an <see cref="T:System.Enum"/>. -or- <paramref name="i"/> does not match a member of the enum.</exception>
+    public static T ParseAsEnum<T>(this int i)
         {
             return (T)Enum.ToObject(typeof(T), i);
         }
