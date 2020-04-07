@@ -198,7 +198,21 @@ namespace Recurly
           case "deleted_at":
             DeletedAt = reader.ReadElementContentAsString().AsDateTime();
             break;
-        #endregion
+
+          case "custom_fields":
+            CustomFields = new List<CustomField>();
+            while (reader.Read())
+            {
+              if (reader.Name == "custom_fields" && reader.NodeType == XmlNodeType.EndElement)
+                break;
+
+              if (reader.NodeType == XmlNodeType.Element && reader.Name == "custom_field")
+              {
+                CustomFields.Add(new CustomField(reader));
+              }
+            }
+            break;
+            #endregion
         }
       }
     }

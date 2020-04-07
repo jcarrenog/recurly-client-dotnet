@@ -15,5 +15,10 @@ namespace Recurly
         {
             return items != null && items.Any();
         }
+
+        public static string GetValue(this IEnumerable<CustomField> field, string name)
+            => field
+                .FirstOrDefault(f => f.Name.Equals(name, System.StringComparison.OrdinalIgnoreCase))
+                ?.Value;
     }
 }
